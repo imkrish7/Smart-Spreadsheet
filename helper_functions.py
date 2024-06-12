@@ -33,7 +33,8 @@ def remove_none_key_value_pairs(d: dict[Any, Any]) -> dict[Any, Any]:
     Returns:
     dict: A new dictionary with None key-value pairs removed.
     """
-
+    print("------Cleaner-----");
+    print(d);
     return {
         key: value for key, value in d.items() if not (key is None and value is None)
     }
@@ -109,9 +110,12 @@ def process_hierarchical_table(ws: Worksheet) -> dict[str, Any]:
             zip(col_headers, [serialize_value(d) for d in data_cells])
         )
         return processed_table
+    
+    print("---processing----")
+    print(ws[2][2:])
 
     col_headers = [serialize_value(e) for e in ws[1][1:]]
-
+    print(col_headers)
     row_headers: list[str] = []
     for column in ws.iter_cols(min_col=1, max_col=1, values_only=False):
         row_headers = [serialize_value(cell) for cell in column[1:]]
@@ -128,8 +132,8 @@ def process_hierarchical_table(ws: Worksheet) -> dict[str, Any]:
     for row in ws.iter_rows(min_row=2, values_only=False):
         level = (
             len(serialize_value(row[0])))
-            - len(serialize_value(row[0])).lstrip()
-         // num_leading_space_per_level
+        len(serialize_value(row[0])).lstrip()
+        num_leading_space_per_level
         label = serialize_value(row[0]).strip()
         data_cells = row[1:]
 
